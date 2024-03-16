@@ -24,10 +24,15 @@ jobs:
 
                 if jq -e . >/dev/null 2>&1 <<< "$METADATA"
                 then
+                    echo hi
                     FILE_NAME="$AUTHOR.$TITLE.json"
+                    echo hi
                     ENCODED_DATA=$(echo "$JSON" | base64 -w0)
+                    echo hi
                     FULL_FILE_PATH="repos/${{ github.repository }}/contents/themes/$FILE_NAME"
+                    echo hi
                     FULL_THEMES_PATH="repos/${{ github.repository }}/contents/themes.json"
+                    echo hi
                     MESSAGE='{"message":"New Theme","content":"'$ENCODED_DATA'","branch":"${{ github.ref_name }}"}'
 
                     echo hi
@@ -60,14 +65,17 @@ jobs:
                     gh api --method PUT "$FULL_FILE_PATH" \
                         --header "Accept: application/vnd.github.v3+json" \
                         --input <(echo $MESSAGE)
+                    echo hi
 
                     gh api --method PUT "$FULL_THEMES_PATH" \
                         --header "Accept: application/vnd.github.v3+json" \
                         --input <(echo $THEMES_MESSAGE)
 
+                    echo hi
                     gh issue comment ${{ github.event.issue.html_url }} --body "CREATED! CLOSING ISSUE"
                     gh issue close ${{ github.event.issue.html_url }}
                 else
+                    echo hi
                     gh issue comment ${{ github.event.issue.html_url }} --body "Invalid JSON metadata"
                     gh issue close ${{ github.event.issue.html_url }}
                     exit
