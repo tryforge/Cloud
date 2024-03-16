@@ -27,7 +27,7 @@ jobs:
                 if jq -e . >/dev/null 2>&1 <<< "$METADATA"
                 then
                     FILE_NAME="$AUTHOR.$TITLE.json"
-                    ENCODED_DATA=$(echo "$JSON" | base64)
+                    ENCODED_DATA=$(echo "$JSON" | base64 -w0)
                     FULL_FILE_PATH="repos/${{ github.repository }}/contents/themes/$FILE_NAME"
                     MESSAGE='{"message":"New Theme","content":"'$ENCODED_DATA'","branch":"${{ github.ref_name }}"}'
 
