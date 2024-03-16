@@ -37,7 +37,7 @@ jobs:
 
                     gh api --method PUT "repos/${{ github.event.repository.owner.name }}/${{ github.event.repository.name }}/contents/themes/$FILE_NAME" \
                         --header "Accept: application/vnd.github.v3+json" \
-                        --input '{"message":"New Theme","content":"$ENCODED_DATA",branch="${{ github.ref_name }}"}'
+                        --input <(echo '{"message":"New Theme","content":"$ENCODED_DATA",branch="${{ github.ref_name }}"}')
 
                     gh issue comment ${{ github.event.issue.html_url }} --body CREATED! CLOSING ISSUE
                     gh issue close ${{ github.event.issue.html_url }}
