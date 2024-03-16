@@ -44,7 +44,7 @@ jobs:
                     echo $MESSAGE
                     
                     THEMES_ARRAY=$(curl "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/themes.json")
-                    UPDATED_THEMES_ARRAY=$(echo $THEMES_ARRAY | jq '. += $JSON')
+                    UPDATED_THEMES_ARRAY=$(echo $THEMES_ARRAY | jq '. += '$JSON'')
                     ENCONDED_THEMES_DATA=$(echo "$UPDATED_THEMES_ARRAY" | base64 -w0)
                     THEMES_MESSAGE='{"message":"New Theme","content":"'$ENCODED_THEMES_DATA'","branch":"${{ github.ref_name }}"}'
 
