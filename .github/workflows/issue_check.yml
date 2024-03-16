@@ -12,7 +12,7 @@ jobs:
                 node-version: '18'
             - name: Run Node.js Script
               run: |
-                echo $(ls)
+                node $HOME/index.js
 
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
