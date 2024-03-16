@@ -11,16 +11,18 @@ jobs:
 
                 TITLE=$(echo "$JSON" | jq -r '.name')
                 AUTHOR=$(echo "$JSON" | jq -r '.author')
+                DESCRIPTION=$(echo "$JSON" | jq -r '.author')
+                VERSION=$(echo "$JSON" | jq -r '.author')
+                METADATA=$(echo "$JSON" | jq -r '.metadata')
 
-                if "$TITLE" == "null" || "$AUTHOR" == "null"
+                if "$TITLE" == "null" || "$AUTHOR" == "null" || "$METADATA" == "null" || "$DESCRIPTION" == "null" || "$VERSION" == "null"
                 then
-                    gh issue comment ${{ github.event.issue.html_url }} --body "Missing title or author"
+                    gh issue comment ${{ github.event.issue.html_url }} --body "Missing metadata attributes"
                     gh issue close ${{ github.event.issue.html_url }}
                     exit 
                 fi
 
-                METADATA=$(echo "$JSON" | jq -r '.metadata')
-                if "$METADATA" != "null" && jq -e . jq -e . >/dev/null 2>&1 <<< "$JSON"
+                if jq -e . jq -e . >/dev/null 2>&1 <<< "$METADATA"
                 then
                     MSG=$(cat <<< END >>>
                         METADATA RETRIEVED!
