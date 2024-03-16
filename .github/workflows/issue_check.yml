@@ -44,9 +44,7 @@ jobs:
                     echo $MESSAGE
                 
                     # Get the SHA hash of the existing file
-                    SHA=$(gh api --silent -X GET \
-                        "$FULL_THEMES_PATH" | \
-                        jq -r '.sha')
+                    SHA=$(gh api "$FULL_THEMES_PATH" | jq -r '.sha')
 
                     echo "SHA: $SHA" 
 
@@ -55,7 +53,7 @@ jobs:
                     ENCONDED_THEMES_DATA=$(echo "$UPDATED_THEMES_ARRAY" | base64 -w0)
 
                     echo "Encoded: $ENCONDED_THEMES_DATA"
-                    
+
                     THEMES_MESSAGE='{"sha":"'$SHA'","message":"New Theme","content":"'$ENCODED_THEMES_DATA'","branch":"${{ github.ref_name }}"}'
 
                     echo $THEMES_MESSAGE
