@@ -14,7 +14,20 @@ jobs:
                 else
                     gh issue comment ${{ github.event.issue.html_url }} --body "Found invalid JSON schema"
                     gh issue close ${{ github.event.issue.html_url }}
+                    exit
                 fi
+                
+                name=$(jq -r '.name' <<< ${{ github.event.issue.body }})
+                author=$(jq -r '.author' <<< ${{ github.event.issue.body }})
+
+                if "$name" == "null" || "$author" == "null"
+                then
+                    gh issue comment ${{ github.event.issue.html_url }} --body "Missing title or author"
+                    gh issue close ${{ github.event.issue.html_url }}
+                    exit 
+                fi
+
+                gh issue comment ${{ github.event.issue.html_url }} --body "Name: $name\nAuthor: $author"                    
 
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
