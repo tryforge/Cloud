@@ -22,6 +22,7 @@ jobs:
                     exit 
                 fi
 
+                echo hi
                 if jq -e . >/dev/null 2>&1 <<< "$METADATA"
                 then
                     echo hi
