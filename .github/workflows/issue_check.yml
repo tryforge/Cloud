@@ -7,16 +7,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - run: |
-                echo "Found issue ${{ github.event.issue.number }}"
-                if jq -e . >/dev/null 2>&1 <<< '${{ env.JSON }}'
-                then
-                    gh issue comment ${{ github.event.issue.html_url }} --body "Found valid JSON schema"
-                else
-                    gh issue comment ${{ github.event.issue.html_url }} --body "Found invalid JSON schema"
-                    gh issue close ${{ github.event.issue.html_url }}
-                    exit
-                fi
-                
+                echo "Found issue ${{ github.event.issue.number }}"                
                 echo "hi"
                 name=$(jq -r '.name' <<< '${{ env.JSON }}')
                 author=$(jq -r '.author' <<< '${{ env.JSON }}')
