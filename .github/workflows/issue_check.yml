@@ -15,4 +15,3 @@ jobs:
               run: node script.js
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    GITHUB_ISSUE: ${{ github.event.issue }}
