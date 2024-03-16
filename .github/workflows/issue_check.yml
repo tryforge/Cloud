@@ -1,7 +1,5 @@
 name: Issue Check
-on: 
-    issues: 
-        types: opened
+on: [issues]
 jobs:
     issue_check:
         runs-on: ubuntu-latest
