@@ -9,6 +9,8 @@ jobs:
             - run: |
                 echo "Found issue ${{ github.event.issue.number }}"
 
+                gh issue comment ${{ github.event.issue.html_url }} --body "Your issue will be processed shortly"
+
                 TITLE=$(echo "$JSON" | jq -r '.name')
                 AUTHOR=$(echo "$JSON" | jq -r '.author')
                 DESCRIPTION=$(echo "$JSON" | jq -r '.author')
