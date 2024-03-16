@@ -1,5 +1,0 @@
-name: 'Theme Request'
-description: 'Idk'
-runs:
-  using: 'node20'
-  main: 'dist/index.js'
