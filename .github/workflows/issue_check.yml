@@ -3,20 +3,16 @@ on:
     issues: 
         types: opened
 jobs:
-    issue_check:
+    check_issue:
         runs-on: ubuntu-latest
         steps:
-            - run: |
-                echo "Found issue ${{ github.event.issue.number }}"
-                body=$(gh issue view ${{ github.event.issue.html_url }} --json body --jq 'body')
-                gh issue close ${{ github.event.issue.html_url }}
-                if ! [ "$body" != "https://*" ]
-                then
-                    gh issue comment ${{ github.event.issue.html_url }} --body "Invalid URL given, exiting early"
-                    exit
-                fi
-                json=$(curl -sSL "$body")
-                gh issue comment ${{ github.event.issue.html_url }} --body "DATA: $body"
+            - name: Install Node.js
+              uses: actions/setup-node@v3
+              with:
+                node-version: '18'
+            - name: Run Node.js Script
+              run: |
+                node index.js 
 
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
