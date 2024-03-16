@@ -30,6 +30,7 @@ jobs:
                     ENCODED_DATA=$(echo "$JSON" | base64)
                     PATH="repos/${{ github.event.repository.owner.name }}/${{ github.event.repository.name }}/contents/themes/$FILE_NAME"
 
+                    echo hi
                     gh issue comment ${{ github.event.issue.html_url }} --body "
                     METADATA RETRIEVED!
                     TITLE: $TITLE
