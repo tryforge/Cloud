@@ -8,9 +8,15 @@ jobs:
         steps:
             - run: |
                 echo "Found issue ${{ github.event.issue.number }}"
-                gh issue comment ${{ github.event.issue.html_url }} --body "The issue will be immediately closed!"
-                sleep 5
+                body=$(gh issue view ${{ github.event.issue.html_url }} --json body --jq 'body')
                 gh issue close ${{ github.event.issue.html_url }}
+                if ! [ "$body" != "https://*" ]
+                then
+                    gh issue comment ${{ github.event.issue.html_url }} --body "Invalid URL given, exiting early"
+                    exit
+                fi
+                json=$(curl -sSL "$body")
+                gh issue comment ${{ github.event.issue.html_url }} --body "DATA: $body"
 
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
