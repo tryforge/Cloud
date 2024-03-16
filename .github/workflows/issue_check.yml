@@ -7,6 +7,6 @@ jobs:
     name: A node job to test
     steps:
       - name: Execution
-        uses: Plinkie03/tryforge-theme-action@v1.092
+        uses: Plinkie03/tryforge-theme-action@v1.093
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
