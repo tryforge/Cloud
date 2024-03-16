@@ -24,11 +24,22 @@ jobs:
 
                 if jq -e . >/dev/null 2>&1 <<< "$METADATA"
                 then
+                    FILE_NAME="$AUTHOR.$TITLE.json"
                     gh issue comment ${{ github.event.issue.html_url }} --body "
-                        METADATA RETRIEVED!
-                        TITLE: $TITLE
-                        AUTHOR: $AUTHOR"
-                    
+                    METADATA RETRIEVED!
+                    TITLE: $TITLE
+                    DESCRIPTION: $DESCRIPTION
+                    AUTHOR: $AUTHOR
+                    VERSION: $VERSION
+                    CREATING FILE IN THEMES FOLDER CALLED $FILE_NAME"
+
+                    ENCODED_DATA=$(base64 "$JSON")
+
+                    gh api --method PUT "repos/${{ github.event.repository.owner.name }}/${{ github.event.repository.name }}/contents/themes/$FILE_NAME" \
+                        --header "Accept: application/vnd.github.v3+json" \
+                        --input '{"message":"New Theme","content":"$ENCODED_DATA",branch="${{ github.ref_name }}"}'
+                        
+                    gh issue comment ${{ github.event.issue.html_url }} --body CREATED! CLOSING ISSUE
                     gh issue close ${{ github.event.issue.html_url }}
                 else
                     gh issue comment ${{ github.event.issue.html_url }} --body Invalid JSON metadata
