@@ -1,0 +1,16 @@
+name: Issue Check
+on: 
+    issues: 
+        types: opened
+jobs:
+    issue_check:
+        runs-on: ubuntu-latest
+        steps:
+            - run: |
+                echo "Found issue ${{ github.event.issue.number }}"
+                gh issue comment ${{ github.event.issue.number }} --body "The issue will be immediately closed!"
+                sleep 5
+                gh issue close ${{ github.event.issue.number }}
+
+env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
