@@ -12,6 +12,8 @@ jobs:
                 node-version: 18
             
             - name: Execute Script
-              run: node script.js
+              run: |
+                echo "console.log("hey!")" >> script.js
+                node script.js
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
