@@ -17,7 +17,7 @@ jobs:
                 VERSION=$(echo "$JSON" | jq -r '.author')
                 METADATA=$(echo "$JSON" | jq -r '.metadata')
 
-                if "$TITLE" = "null" || "$AUTHOR" = "null" || "$METADATA" = "null" || "$DESCRIPTION" = "null" || "$VERSION" = "null"
+                if [ "$TITLE" = "null" ] || [ "$AUTHOR" = "null" ] || [ "$METADATA" = "null" ] || [ "$DESCRIPTION" = "null" ] || [ "$VERSION" = "null" ]
                 then
                     gh issue comment ${{ github.event.issue.html_url }} --body "Missing metadata attributes"
                     gh issue close ${{ github.event.issue.html_url }}
@@ -61,7 +61,7 @@ jobs:
                         THEME_AUTHOR=$(echo "$THEME_JSON" | jq -r '.author')
 
                         echo "CHECKING $THEME_TITLE AGAINST $TITLE AND $THEME_AUTHOR AGAINST $AUTHOR"
-                        if "$THEME_TITLE" = "$TITLE" && "$AUTHOR" = "$THEME_AUTHOR"
+                        if [ "$THEME_TITLE" = "$TITLE" ] && [ "$AUTHOR" = "$THEME_AUTHOR" ]
                         then
                             gh issue comment ${{ github.event.issue.html_url }} --body "Another theme of yours exists with the same metadata..."
                             gh issue close ${{ github.event.issue.html_url }}
