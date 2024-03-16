@@ -8,7 +8,7 @@ jobs:
         steps:
             - run: |
                 echo "Found issue ${{ github.event.issue.number }}"
-                if jq empty <<< "${{ github.event.issue.body }}" 2>/dev/null
+                if jq -e . >/dev/null 2>&1 <<<"${{ github.event.issue.body }}"
                 then
                     gh issue comment ${{ github.event.issue.html_url }} --body "Found valid JSON schema"
                 else
