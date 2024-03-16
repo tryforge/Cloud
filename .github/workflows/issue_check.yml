@@ -9,7 +9,7 @@ jobs:
             - run: |
                 echo "Found issue ${{ github.event.issue.number }}"
 
-                gh issue comment "${{ github.event.issue.html_url }}" --body "Your issue will be processed shortly"
+                gh issue comment ${{ github.event.issue.html_url }} --body "Your issue will be processed shortly"
 
                 TITLE=$(echo "$JSON" | jq -r '.name')
                 AUTHOR=$(echo "$JSON" | jq -r '.author')
@@ -19,8 +19,8 @@ jobs:
 
                 if "$TITLE" == "null" || "$AUTHOR" == "null" || "$METADATA" == "null" || "$DESCRIPTION" == "null" || "$VERSION" == "null"
                 then
-                    gh issue comment "${{ github.event.issue.html_url }}" --body "Missing metadata attributes"
-                    gh issue close "${{ github.event.issue.html_url }}"
+                    gh issue comment ${{ github.event.issue.html_url }} --body "Missing metadata attributes"
+                    gh issue close ${{ github.event.issue.html_url }}
                     exit 
                 fi
 
@@ -32,7 +32,7 @@ jobs:
                     MESSAGE='{"message":"New Theme","content":"'$ENCODED_DATA'","branch":"${{ github.ref_name }}"}'
 
                     echo hi
-                    gh issue comment "${{ github.event.issue.html_url }}" --body "
+                    gh issue comment ${{ github.event.issue.html_url }} --body "
                     METADATA RETRIEVED!
                     TITLE: $TITLE
                     DESCRIPTION: $DESCRIPTION
@@ -46,11 +46,11 @@ jobs:
                         --header "Accept: application/vnd.github.v3+json" \
                         --input <(echo $MESSAGE)
 
-                    gh issue comment "${{ github.event.issue.html_url }}" --body "CREATED! CLOSING ISSUE"
-                    gh issue close "${{ github.event.issue.html_url }}"
+                    gh issue comment ${{ github.event.issue.html_url }} --body "CREATED! CLOSING ISSUE"
+                    gh issue close ${{ github.event.issue.html_url }}
                 else
-                    gh issue comment "${{ github.event.issue.html_url }}" --body "Invalid JSON metadata"
-                    gh issue close "${{ github.event.issue.html_url }}"
+                    gh issue comment ${{ github.event.issue.html_url }} --body "Invalid JSON metadata"
+                    gh issue close ${{ github.event.issue.html_url }}
                     exit
                 fi
 
