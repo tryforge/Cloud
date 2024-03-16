@@ -54,7 +54,7 @@ jobs:
 
                     echo "Encoded: $ENCONDED_THEMES_DATA"
 
-                    THEMES_MESSAGE='{"sha":"'"$SHA"'","content":"'"$ENCODED_THEMES_DATA"'","message":"New Theme","branch":"${{ github.ref_name }}"}'
+                    THEMES_MESSAGE=$(printf '{"sha":"%s","content":"%s","message":"New Theme","branch":"${{ github.ref_name }}"}' "$SHA" "$ENCONDED_THEMES_DATA")
 
                     echo $THEMES_MESSAGE
 
