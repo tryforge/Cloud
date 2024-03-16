@@ -31,11 +31,7 @@ jobs:
                     PATH="repos/${{ github.event.repository.owner.name }}/${{ github.event.repository.name }}/contents/themes/$FILE_NAME"
 
                     echo hi
-                    gh issue comment ${{ github.event.issue.html_url }} --body "METADATA RETRIEVED!
-                    TITLE: $TITLE
-                    DESCRIPTION: $DESCRIPTION
-                    AUTHOR: $AUTHOR
-                    VERSION: $VERSION"
+                    gh issue comment ${{ github.event.issue.html_url }} --body "METADATA RETRIEVED!"
                     
                     echo "sent"
 
