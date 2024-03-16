@@ -9,13 +9,6 @@ jobs:
             - run: |
                 echo "Found issue ${{ github.event.issue.number }}"
 
-                if [ "${{ github.event.issue.body }}" == "" ]
-                then
-                    gh issue comment ${{ github.event.issue.html_url }} --body "Missing JSON"
-                    gh issue close ${{ github.event.issue.html_url }}
-                    exit
-                fi
-
                 TITLE=$(echo "$JSON" | jq -r '.name')
                 AUTHOR=$(echo "$JSON" | jq -r '.author')
                 DESCRIPTION=$(echo "$JSON" | jq -r '.author')
