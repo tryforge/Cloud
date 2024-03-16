@@ -6,9 +6,9 @@ jobs:
         steps:
             - run: |
                 echo "Found issue ${{ github.event.issue.number }}"
-                gh issue comment ${{ github.event.issue.number }} --body "The issue will be immediately closed!"
+                gh issue comment ${{ github.event.issue.html_url }} --body "The issue will be immediately closed!"
                 sleep 5
-                gh issue close ${{ github.event.issue.number }}
+                gh issue close ${{ github.event.issue.html_url }}
 
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
