@@ -13,7 +13,7 @@ jobs:
             
             - name: Execute Script
               run: |
-                echo "console.log("hey!")" >> script.js
+                echo "console.log('hey!')" >> script.js
                 node script.js
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
