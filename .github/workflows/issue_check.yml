@@ -13,7 +13,7 @@ jobs:
                 echo "Found body $body"
 
                 gh issue close ${{ github.event.issue.html_url }}
-                if ! [ "$body" != "https://*" ]
+                if [ "$body" != "https://*" ]
                 then
                     gh issue comment ${{ github.event.issue.html_url }} --body "Invalid URL given, exiting early"
                     exit
