@@ -3,6 +3,7 @@ on:
         types: opened
 jobs:
   node_job:
+    permissions: write-all
     runs-on: ubuntu-latest
     name: A node job to test
     steps:
