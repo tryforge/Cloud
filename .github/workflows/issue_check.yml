@@ -42,11 +42,16 @@ jobs:
                     CREATING FILE IN THEMES FOLDER CALLED $FILE_NAME ($FULL_FILE_PATH)"
                     
                     echo $MESSAGE
-                    
+                
+                    # Get the SHA hash of the existing file
+                    SHA=$(gh api --silent -X GET \
+                        "$FULL_THEMES_PATH" | \
+                        jq -r '.sha')
+
                     THEMES_ARRAY=$(curl "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/themes.json")
                     UPDATED_THEMES_ARRAY=$(echo $THEMES_ARRAY | jq '. += '"[$JSON]"'')
                     ENCONDED_THEMES_DATA=$(echo "$UPDATED_THEMES_ARRAY" | base64 -w0)
-                    THEMES_MESSAGE='{"message":"New Theme","content":"'$ENCODED_THEMES_DATA'","branch":"${{ github.ref_name }}"}'
+                    THEMES_MESSAGE='{"message":"New Theme","content":"'$ENCODED_THEMES_DATA'","sha":"'$SHA'","branch":"${{ github.ref_name }}"}'
 
                     echo $UPDATED_THEMES_ARRAY
 
@@ -57,7 +62,6 @@ jobs:
                     gh api --method PUT "$FULL_FILE_PATH" \
                         --header "Accept: application/vnd.github.v3+json" \
                         --input <(echo $MESSAGE)
-
 
                     gh issue comment ${{ github.event.issue.html_url }} --body "CREATED! CLOSING ISSUE"
                     gh issue close ${{ github.event.issue.html_url }}
