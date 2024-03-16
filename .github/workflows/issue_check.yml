@@ -53,7 +53,7 @@ jobs:
                     ENCONDED_THEMES_DATA=$(echo "$UPDATED_THEMES_ARRAY" | base64 -w0)
                     THEMES_MESSAGE='{"sha":"'$SHA'","message":"New Theme","content":"'$ENCODED_THEMES_DATA'","branch":"${{ github.ref_name }}"}'
 
-                    echo $UPDATED_THEMES_ARRAY
+                    echo $THEMES_MESSAGE
 
                     gh api --method PUT "$FULL_THEMES_PATH" \
                         --header "Accept: application/vnd.github.v3+json" \
