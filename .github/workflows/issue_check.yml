@@ -9,10 +9,10 @@ jobs:
             - run: |
                 echo "Found issue ${{ github.event.issue.number }}"                
 
-                TITLE=$(echo "${{ env.JSON }}" | jq -r 'name')
-                AUTHOR=$(echo "${{ env.JSON }}" | jq -r 'author')
-
-                echo "hi"
+                JSON=${{ env.JSON }}
+                
+                TITLE=$(echo "$JSON" | jq -r 'name')
+                AUTHOR=$(echo "$JSON" | jq -r 'author')
 
                 if "$TITLE" == "null" || "$AUTHOR" == "null"
                 then
