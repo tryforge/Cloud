@@ -7,8 +7,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - run: |
-                echo "Found issue ${{ github.event.issue.number }}"                
-                echo lol $JSON
+                echo "Found issue ${{ github.event.issue.number }}"
 
                 TITLE=$(echo "$JSON" | jq -r '.name')
                 AUTHOR=$(echo "$JSON" | jq -r '.author')
@@ -20,7 +19,21 @@ jobs:
                     exit 
                 fi
 
-                gh issue comment ${{ github.event.issue.html_url }} --body "Name: $TITLE\nAuthor: $AUTHOR"                    
+                METADATA=$(echo "$JSON" | jq -r '.metadata')
+                if "$METADATA" != "null" && jq -e . jq -e . >/dev/null 2>&1 <<< "$JSON"
+                then
+                    MSG=$(cat <<< END >>>
+                        METADATA RETRIEVED!
+                        TITLE: $TITLE
+                        AUTHOR: $AUTHOR
+                    END)
+                    gh issue comment ${{ github.event.issue.html_url }} --body $MSG
+                    gh issue close ${{ github.event.issue.html_url }}
+                else
+                    gh issue comment ${{ github.event.issue.html_url }} --body Invalid JSON metadata
+                    gh issue close ${{ github.event.issue.html_url }}
+                    exit
+                fi
 
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
