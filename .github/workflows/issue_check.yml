@@ -9,8 +9,9 @@ jobs:
             - run: |
                 echo "Found issue ${{ github.event.issue.number }}"                
                 echo "hi"
-                name=$(jq -r '.name' <<< "${{ env.JSON }}")
-                author=$(jq -r '.author' <<< "${{ env.JSON }}")
+                
+                name=$(echo "${{ env.JSON }}" | jq -r '.name')
+                author=$(echo "${{ env.JSON }}" | jq -r '.author')
 
                 echo "hi"
 
