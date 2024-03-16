@@ -29,7 +29,7 @@ jobs:
                     FILE_NAME="$AUTHOR.$TITLE.json"
                     ENCODED_DATA=$(echo "$JSON" | base64)
                     FULL_FILE_PATH="repos/${{ github.repository }}/contents/themes/$FILE_NAME"
-                    MESSAGE='{"message":"New Theme","content":"$ENCODED_DATA","branch":"${{ github.ref_name }}"}'
+                    MESSAGE='{"message":"New Theme","content":"'"$ENCODED_DATA"'","branch":"${{ github.ref_name }}"}'
 
                     echo hi
                     gh issue comment ${{ github.event.issue.html_url }} --body "
