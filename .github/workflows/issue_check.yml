@@ -38,8 +38,9 @@ jobs:
                     DESCRIPTION: $DESCRIPTION
                     AUTHOR: $AUTHOR
                     VERSION: $VERSION
-                    CREATING FILE IN THEMES FOLDER CALLED $FILE_NAME ($FULL_FILE_PATH)
-                    JSON: $MESSAGE"
+                    CREATING FILE IN THEMES FOLDER CALLED $FILE_NAME ($FULL_FILE_PATH)"
+                    
+                    echo $MESSAGE
                     
                     gh api --method PUT "$FULL_FILE_PATH" \
                         --header "Accept: application/vnd.github.v3+json" \
