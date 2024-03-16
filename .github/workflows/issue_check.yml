@@ -24,12 +24,11 @@ jobs:
 
                 if jq -e . jq -e . >/dev/null 2>&1 <<< "$METADATA"
                 then
-                    MSG=$(cat <<< END >>>
-                        METADATA RETRIEVED!
-                        TITLE: $TITLE
+                    gh issue comment ${{ github.event.issue.html_url }} --body \
+                        METADATA RETRIEVED! \
+                        TITLE: $TITLE \
                         AUTHOR: $AUTHOR
-                    END)
-                    gh issue comment ${{ github.event.issue.html_url }} --body $MSG
+                    
                     gh issue close ${{ github.event.issue.html_url }}
                 else
                     gh issue comment ${{ github.event.issue.html_url }} --body Invalid JSON metadata
