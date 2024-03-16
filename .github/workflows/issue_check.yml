@@ -8,7 +8,7 @@ jobs:
         steps:
             - run: |
                 echo "Found issue ${{ github.event.issue.number }}"
-                body=$(gh issue view ${{ github.event.issue.html_url }} --json body --jq 'body')
+                body=$(gh issue view ${{ github.event.issue.html_url }} --json body)
                 
                 echo "Found body $body"
 
