@@ -25,17 +25,18 @@ jobs:
                 if jq -e . >/dev/null 2>&1 <<< "$METADATA"
                 then
                     FILE_NAME="$AUTHOR.$TITLE.json"
+                    ENCODED_DATA=$(echo "$JSON" | base64)
+                    PATH="repos/${{ github.event.repository.owner.name }}/${{ github.event.repository.name }}/contents/themes/$FILE_NAME"
+
                     gh issue comment ${{ github.event.issue.html_url }} --body "
                     METADATA RETRIEVED!
                     TITLE: $TITLE
                     DESCRIPTION: $DESCRIPTION
                     AUTHOR: $AUTHOR
                     VERSION: $VERSION
-                    CREATING FILE IN THEMES FOLDER CALLED $FILE_NAME"
-
-                    ENCODED_DATA=$(echo "$JSON" | base64)
-
-                    gh api --method PUT "repos/${{ github.event.repository.owner.name }}/${{ github.event.repository.name }}/contents/themes/$FILE_NAME" \
+                    CREATING FILE IN THEMES FOLDER CALLED $FILE_NAME ($PATH)"
+                    
+                    gh api --method PUT "$PATH" \
                         --header "Accept: application/vnd.github.v3+json" \
                         --input <(echo '{"message":"New Theme","content":"$ENCODED_DATA",branch="${{ github.ref_name }}"}')
 
