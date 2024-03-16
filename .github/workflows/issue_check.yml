@@ -1,19 +1,12 @@
-name: Issue Check
-on:
+on: 
     issues: 
         types: opened
 jobs:
-    issue_check:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Install node.js v18
-              uses: actions/setup-node@v3
-              with:
-                node-version: 18
-            
-            - name: Execute Script
-              run: |
-                echo "console.log('hey!')" >> script.js
-                node script.js
+  node_job:
+    runs-on: ubuntu-latest
+    name: A node job to test
+    steps:
+      - name: Execution
+        uses: Plinkie03/my-workflow-testing@v1.1
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
