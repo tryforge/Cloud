@@ -17,11 +17,12 @@ jobs:
                     exit
                 fi
                 
+                echo "hi"
                 name=$(jq -r '.name' <<< ${{ github.event.issue.body }})
                 author=$(jq -r '.author' <<< ${{ github.event.issue.body }})
 
                 echo "hi"
-                
+
                 if "$name" == "null" || "$author" == "null"
                 then
                     gh issue comment ${{ github.event.issue.html_url }} --body "Missing title or author"
