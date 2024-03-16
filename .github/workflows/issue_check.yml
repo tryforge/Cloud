@@ -50,8 +50,23 @@ jobs:
 
                     THEMES_ARRAY=$(curl "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/themes.json")
                     THEMES_LEN=$(echo $THEMES_ARRAY | jq '. |length')
-                    echo $THEMES_LEN
                     
+                    while (( THEMES_LEN != 0 ))
+                    do 
+                        ((THEMES_LEN--))
+                        THEME_JSON=$(echo $THEMES_ARRAY | jq -r '.['$THEMES_LEN']')
+
+                        THEME_TITLE=$(echo "$THEME_JSON" | jq -r '.name')
+                        THEME_AUTHOR=$(echo "$THEME_JSON" | jq -r '.author')
+
+                        if "$THEME_TITLE" == "TITLE" && "$AUTHOR" == "$THEME_AUTHOR"
+                        then
+                            gh issue comment ${{ github.event.issue.html_url }} --body "Another theme of yours exists with the same metadata..."
+                            gh issue close ${{ github.event.issue.html_url }}
+                            exit
+                        fi
+                    done
+
                     UPDATED_THEMES_ARRAY=$(echo $THEMES_ARRAY | jq '. += '"[$JSON]"'')
                     ENCONDED_THEMES_DATA=$(echo "$UPDATED_THEMES_ARRAY" | base64 -w0)
 
