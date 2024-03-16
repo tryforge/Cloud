@@ -29,6 +29,7 @@ jobs:
                     FILE_NAME="$AUTHOR.$TITLE.json"
                     ENCODED_DATA=$(echo "$JSON" | base64)
                     FULL_FILE_PATH="repos/${{ github.repository }}/contents/themes/$FILE_NAME"
+                    MESSAGE='{"message":"New Theme","content":"$ENCODED_DATA","branch":"${{ github.ref_name }}"}'
 
                     echo hi
                     gh issue comment ${{ github.event.issue.html_url }} --body "
@@ -37,12 +38,12 @@ jobs:
                     DESCRIPTION: $DESCRIPTION
                     AUTHOR: $AUTHOR
                     VERSION: $VERSION
-                    CREATING FILE IN THEMES FOLDER CALLED $FILE_NAME ($FULL_FILE_PATH)"
-                    
+                    CREATING FILE IN THEMES FOLDER CALLED $FILE_NAME ($FULL_FILE_PATH)
+                    JSON: $MESSAGE"
                     
                     gh api --method PUT "$FULL_FILE_PATH" \
                         --header "Accept: application/vnd.github.v3+json" \
-                        --input <(echo '{"message":"New Theme","content":"$ENCODED_DATA","branch":"${{ github.ref_name }}"}')
+                        --input <(echo $MESSAGE)
 
                     gh issue comment ${{ github.event.issue.html_url }} --body CREATED! CLOSING ISSUE
                     gh issue close ${{ github.event.issue.html_url }}
