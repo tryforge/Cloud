@@ -8,7 +8,7 @@ jobs:
         steps:
             - run: |
                 echo "Found issue ${{ github.event.issue.number }}"
-                if jq -e . >/dev/null 2>&1 <<<"${{ github.event.issue.body }}"
+                if jq -e . >/dev/null 2>&1 <<<${{ env.JSON }}
                 then
                     gh issue comment ${{ github.event.issue.html_url }} --body "Found valid JSON schema"
                 else
@@ -18,8 +18,8 @@ jobs:
                 fi
                 
                 echo "hi"
-                name=$(jq -r '.name' <<< ${{ github.event.issue.body }})
-                author=$(jq -r '.author' <<< ${{ github.event.issue.body }})
+                name=$(jq -r '.name' <<< ${{ env.JSON }})
+                author=$(jq -r '.author' <<< ${{ env.JSON }})
 
                 echo "hi"
 
@@ -34,3 +34,4 @@ jobs:
 
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    JSON: ${{ github.event.issue.body }}
