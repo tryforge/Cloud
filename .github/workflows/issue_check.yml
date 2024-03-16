@@ -27,6 +27,8 @@ jobs:
                 if jq -e . >/dev/null 2>&1 <<< "$METADATA"
                 then
                     FILE_NAME="$AUTHOR.$TITLE.json"
+                    ENCODED_DATA=$(echo "$JSON" | base64)
+                    FULL_FILE_PATH="repos/${{ github.event.repository.owner.name }}/${{ github.event.repository.name }}/contents/themes/$FILE_NAME"
 
                     echo hi
                     gh issue comment ${{ github.event.issue.html_url }} --body "
@@ -35,12 +37,10 @@ jobs:
                     DESCRIPTION: $DESCRIPTION
                     AUTHOR: $AUTHOR
                     VERSION: $VERSION
-                    CREATING FILE IN THEMES FOLDER CALLED $FILE_NAME ($PATH)"
+                    CREATING FILE IN THEMES FOLDER CALLED $FILE_NAME ($FULL_FILE_PATH)"
                     
-                    ENCODED_DATA=$(echo "$JSON" | base64)
-                    PATH="repos/${{ github.event.repository.owner.name }}/${{ github.event.repository.name }}/contents/themes/$FILE_NAME"
                     
-                    gh api --method PUT "$PATH" \
+                    gh api --method PUT "$FULL_FILE_PATH" \
                         --header "Accept: application/vnd.github.v3+json" \
                         --input <(echo '{"message":"New Theme","content":"$ENCODED_DATA",branch="${{ github.ref_name }}"}')
 
