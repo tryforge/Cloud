@@ -46,10 +46,10 @@ jobs:
                         --header "Accept: application/vnd.github.v3+json" \
                         --input <(echo $MESSAGE)
 
-                    gh issue comment ${{ github.event.issue.html_url }} --body CREATED! CLOSING ISSUE
+                    gh issue comment ${{ github.event.issue.html_url }} --body "CREATED! CLOSING ISSUE"
                     gh issue close ${{ github.event.issue.html_url }}
                 else
-                    gh issue comment ${{ github.event.issue.html_url }} --body Invalid JSON metadata
+                    gh issue comment ${{ github.event.issue.html_url }} --body "Invalid JSON metadata"
                     gh issue close ${{ github.event.issue.html_url }}
                     exit
                 fi
