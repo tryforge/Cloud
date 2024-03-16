@@ -28,7 +28,7 @@ jobs:
                 then
                     FILE_NAME="$AUTHOR.$TITLE.json"
                     ENCODED_DATA=$(echo "$JSON" | base64)
-                    FULL_FILE_PATH="repos/${{ github.event.repository.owner.name }}/${{ github.event.repository.name }}/contents/themes/$FILE_NAME"
+                    FULL_FILE_PATH="repos/${{ github.repository }}/contents/themes/$FILE_NAME"
 
                     echo hi
                     gh issue comment ${{ github.event.issue.html_url }} --body "
