@@ -9,7 +9,12 @@ jobs:
             - run: |
                 echo "Found issue ${{ github.event.issue.number }}"
 
-                gh issue comment ${{ github.event.issue.html_url }} --body "Your issue will be processed shortly"
+                if [ "${{ github.event.issue.body }}" == "" ]
+                then
+                    gh issue comment ${{ github.event.issue.html_url }} --body "Missing JSON"
+                    gh issue close ${{ github.event.issue.html_url }}
+                    exit
+                fi
 
                 TITLE=$(echo "$JSON" | jq -r '.name')
                 AUTHOR=$(echo "$JSON" | jq -r '.author')
@@ -78,13 +83,20 @@ jobs:
 
                     echo $THEMES_MESSAGE
 
+                    saved=$(gh api --method PUT "$FULL_FILE_PATH" \
+                        --header "Accept: application/vnd.github.v3+json" \
+                        --input <(echo $MESSAGE) || false)
+                    
+                    if ! saved
+                    then
+                        gh issue comment ${{ github.event.issue.html_url }} --body "Another theme of yours exists with the same metadata..."
+                        gh issue close ${{ github.event.issue.html_url }}
+                        exit
+                    fi
+
                     gh api --method PUT "$FULL_THEMES_PATH" \
                         --header "Accept: application/vnd.github.v3+json" \
                         --input <(echo $THEMES_MESSAGE)
-
-                    gh api --method PUT "$FULL_FILE_PATH" \
-                        --header "Accept: application/vnd.github.v3+json" \
-                        --input <(echo $MESSAGE)
 
                     gh issue comment ${{ github.event.issue.html_url }} --body "CREATED! CLOSING ISSUE"
                     gh issue close ${{ github.event.issue.html_url }}
