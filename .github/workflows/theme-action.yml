@@ -12,8 +12,8 @@ jobs:
         uses: zentered/issue-forms-body-parser@v1.5.1
 
       - name: Execution
-        uses: Plinkie03/tryforge-theme-action@v1.0996
+        uses: Plinkie03/tryforge-theme-action@v1.0997
         with:
-          theme_json: ${{ steps.parse-issue.outputs.data.theme_json }}
+          outputs: ${{ steps.parse-issue.outputs }}
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
