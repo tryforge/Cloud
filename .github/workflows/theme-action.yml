@@ -12,7 +12,7 @@ jobs:
         uses: zentered/issue-forms-body-parser@v1.5.1
 
       - name: Execution
-        uses: Plinkie03/tryforge-theme-action@v1.09993
+        uses: Plinkie03/tryforge-theme-action@v1.09994
         with:
           outputs: ${{ steps.parse-issue.outputs.data }}
 env:
