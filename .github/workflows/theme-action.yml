@@ -1,6 +1,8 @@
 on: 
     issues: 
         types: opened
+    issue_comment: 
+        types: created
 jobs:
   node_job:
     permissions: write-all
@@ -12,7 +14,7 @@ jobs:
         uses: zentered/issue-forms-body-parser@v1.5.1
 
       - name: Execution
-        uses: Plinkie03/tryforge-theme-action@v1.16
+        uses: Plinkie03/tryforge-theme-action@v1.17
         with:
           outputs: ${{ steps.parse-issue.outputs.data }}
 env:
