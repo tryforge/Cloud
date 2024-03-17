@@ -1,0 +1,13 @@
+name: Theme Deletion
+description: Delete a theme from ForgePanel, collaborators only
+title: "[Theme]: "
+labels: ["theme"]
+body:
+    - type: input
+      id: theme_name
+      attributes:
+        label: Theme Name
+        description: Provide the author name and the theme name to delete
+        placeholder: "Example: Berk404/Dark" 
+      validations:
+        required: true
