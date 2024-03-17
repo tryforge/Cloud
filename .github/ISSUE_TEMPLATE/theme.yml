@@ -1,0 +1,20 @@
+name: Theme Upload/Update
+description: Upload or update a theme for ForgePanel
+title: "[Theme]: "
+labels: ["theme"]
+body:
+    - type: input
+      id: theme_json
+      attributes:
+        label: Theme JSON
+        description: Provide the JSON that was given to you using ForgePanel
+      validations:
+        required: true
+    - type: checkboxes
+      id: tos
+      attributes:
+        label: "I agree to follow this project's Code of Conduct. I have permission to use the theme I have linked to within this form."
+        description: By submitting this theme, you agree to follow our [Code of Conduct](https://github.com/tryforge/Cloud/main/TERMS_OF_SERVICE.md), You further agree that you either own or have permission to use any content you have linked to within this form.
+        options:
+          - label: "I agree to follow this project's Code of Conduct. I have permission to use the theme I have linked to within this form."
+            required: true

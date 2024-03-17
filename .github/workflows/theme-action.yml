@@ -7,7 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     name: Theme Action
     steps:
+      - name: Issue Forms Body Parser
+        id: parse-issue
+        uses: zentered/issue-forms-body-parser@v1.5.1
+
       - name: Execution
-        uses: Plinkie03/tryforge-theme-action@v1.0995
+        uses: Plinkie03/tryforge-theme-action@v1.0996
+        with:
+          theme_json: ${{ steps.parse-issue.outputs.data.theme_json }}
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
