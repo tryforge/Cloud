@@ -14,6 +14,6 @@ jobs:
       - name: Execution
         uses: Plinkie03/tryforge-theme-action@v1.0997
         with:
-          outputs: ${{ steps.parse-issue.outputs }}
+          outputs: ${{ steps.parse-issue.outputs.data }}
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
