@@ -4,8 +4,8 @@
   --color-ui-secondary: #dfe0e2;
   --color-ui-component-top: #f2f3f5;
   --color-ui-component-content: #f2f3f5;
-  --color-ui-shade: #c0c0c0;
-  --color-ui-bar: #e6e6e6;
+  --color-ui-shade: #e6e6e6;
+  --color-ui-bar: #c6c6c6;
 
   /* Text Colors */
   --color-text-primary: #000000;
@@ -13,7 +13,7 @@
   --color-text-tertiary: #ffffff;
   --color-text-accent: #7748cf;
   --color-text-alt: #444444;
-  --color-sidebar-icons: #888888;
+  --color-sidebar-icons: #515151;
 
   /* Border Colors */
   --color-border-primary: #e0e0e0;
