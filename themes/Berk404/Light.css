@@ -1,22 +1,30 @@
 :root {
- --primary-background: #dfe0e2;
- --secondary-background: #dfe0e2;
- --tertiary-background: #f2f3f5;
- --color-alt-secondary: #f2f3f5;
- --color-alt-light: #c6c6c6;
- --shade-background: #c0c0c0;
- --secondary-shade: #e6e6e6;
- --primary-text: #000000;
- --secondary-text: #484848;
- --tertiary-text: #ffffff;
- --colored-text: #7748cf;
- --alt-text: #444444;
- --light-gray: #888888;
- --primary-border: #e0e0e0;
- --secondary-border: #ffffff;
- --dark-gray: #515151;
- --tooltip-color: #000000;
- --tooltip-text: #ffffff;
- --scrollbar-thumb: #d1d1d1;
- --scrollbar-bg: #e3e3e3;
+  /* UI Colors */
+  --color-ui-primary: #dfe0e2;
+  --color-ui-secondary: #dfe0e2;
+  --color-ui-component-top: #f2f3f5;
+  --color-ui-component-content: #f2f3f5;
+  --color-ui-shade: #c0c0c0;
+  --color-ui-bar: #e6e6e6;
+
+  /* Text Colors */
+  --color-text-primary: #000000;
+  --color-text-secondary: #484848;
+  --color-text-tertiary: #ffffff;
+  --color-text-accent: #7748cf;
+  --color-text-alt: #444444;
+  --color-sidebar-icons: #888888;
+
+  /* Border Colors */
+  --color-border-primary: #e0e0e0;
+  --color-border-secondary: #ffffff;
+
+  /* Other Colors */
+  --color-tooltip-background: #000000;
+  --color-tooltip-text: #ffffff;
+  --color-scrollbar-thumb: #d1d1d1;
+  --color-scrollbar-bg: #e3e3e3;
+
+  /* Filters */
+  --filter-accent-hue: 0deg;
 }
