@@ -1,0 +1,30 @@
+:root {
+    /* UI Colors */
+    --color-ui-primary: #00002e;
+    --color-ui-secondary: #100a22;
+    --color-ui-component-top: #090231;
+    --color-ui-component-content: #0c0436;
+    --color-ui-shade: #0e052c;
+    --color-ui-bar: #302f37;
+  
+    /* Text Colors */
+    --color-text-primary: #bebebe;
+    --color-text-secondary: #9c9c9c;
+    --color-text-tertiary: #ffffff;
+    --color-text-accent: #646464;
+    --color-text-alt: #7e7e7e;
+    --color-sidebar-icons: #b3b3b3;
+  
+    /* Border Colors */
+    --color-border-primary: #35384b;
+    --color-border-secondary: #0c0e1a;
+  
+    /* Other Colors */
+    --color-tooltip-background: #070230;
+    --color-tooltip-text: #747474;
+    --color-scrollbar-thumb: #3a3a3a;
+    --color-scrollbar-bg: #969696;
+  
+    /* Filters */
+    --filter-accent-hue: 330deg;
+  }
