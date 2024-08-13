@@ -1,0 +1,30 @@
+:root {
+    /* UI Colors */
+    --color-ui-primary: #F1EFEB;
+    --color-ui-secondary: #F6F6F6;
+    --color-ui-component-top: #DDD5D5;
+    --color-ui-component-content: #EDEDED;
+    --color-ui-shade: #E8E1D5;
+    --color-ui-bar: #D3DCE9;
+  
+    /* Text Colors */
+    --color-text-primary: #808080;
+    --color-text-secondary: #000000;
+    --color-text-tertiary: #DFE4D6;
+    --color-text-accent: #000000;
+    --color-text-alt: #808080;
+    --color-sidebar-icons: #808080;
+  
+    /* Border Colors */
+    --color-border-primary: #E8E1D5;
+    --color-border-secondary: #D3DCE9;
+  
+    /* Other Colors */
+    --color-tooltip-background: #DFE4D6;
+    --color-tooltip-text: #000000;
+    --color-scrollbar-thumb: #F1EFEB;
+    --color-scrollbar-bg: #DDD5D5;
+  
+    /* Filters */
+    --filter-accent-hue: 155deg;
+  }
