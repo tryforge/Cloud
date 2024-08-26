@@ -24,6 +24,8 @@
   --color-tooltip-text: #ffffff;
   --color-scrollbar-thumb: #d1d1d1;
   --color-scrollbar-bg: #e3e3e3;
+  --color-toggle-bg: #9ea6b5;
+  --color-tab-active: rgb(0, 0, 0, 0.5%);
 
   /* Filters */
   --filter-accent-hue: 0deg;
